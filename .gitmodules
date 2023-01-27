@@ -1,0 +1,3 @@
+[submodule "packages/dpro"]
+	path = packages/dpro
+	url = git@github.com:normidar/DPro.git
