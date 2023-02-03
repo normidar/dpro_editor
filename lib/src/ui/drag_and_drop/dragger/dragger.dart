@@ -20,13 +20,13 @@ class Dragger extends StatelessWidget {
       feedback: underMouse,
       childWhenDragging: draggedShow,
       onDragUpdate: (details) {
-        final box = DproManager.getInstance()
-            .getGlobalKey()
-            .currentContext
-            ?.findRenderObject() as RenderBox?;
-        assert(box != null);
-        Offset position = box!.globalToLocal(details.globalPosition);
+        final position =
+            DproManager.getInstance().countLocalOffset(details.globalPosition);
+        DproManager.getInstance().tryToHit(position);
         dragOnEditorListener?.call(position);
+      },
+      onDraggableCanceled: (velocity, offset) {
+        DproManager.getInstance().unHitAll();
       },
       child: defaultShow,
     );

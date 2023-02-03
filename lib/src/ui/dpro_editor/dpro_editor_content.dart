@@ -1,4 +1,5 @@
 import 'package:dpro_editor/src/ui/dpro_Item_bar/dpro_item_bar.dart';
+import 'package:dpro_editor/src/ui/drag_and_drop/dropper/dropper/dropper.dart';
 import 'package:flutter/material.dart';
 
 class DproEditorContent extends StatelessWidget {
@@ -19,6 +20,8 @@ class DproEditorContent extends StatelessWidget {
             child: DproItemBar(),
           ),
         ),
+        Positioned(left: 50, top: 50, child: Dropper()),
+        Positioned(left: 150, top: 150, child: Dropper()),
       ]),
     );
   }
