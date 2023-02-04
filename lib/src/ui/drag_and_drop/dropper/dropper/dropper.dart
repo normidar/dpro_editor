@@ -46,7 +46,11 @@ class _DropperState extends State<Dropper> with SingleTickerProviderStateMixin {
       key: myGlobalKey,
       width: animation.value,
       height: 20,
-      color: Colors.grey,
+      decoration: BoxDecoration(
+        color: Colors.grey,
+        border: Border.all(width: 1.5, color: Colors.grey.shade800),
+        borderRadius: BorderRadius.circular(5),
+      ),
     );
   }
 }
