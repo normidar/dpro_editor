@@ -9,8 +9,12 @@ class Dropper extends StatefulWidget {
   State<Dropper> createState() => _DropperState();
 }
 
-class _DropperState extends State<Dropper> {
+class _DropperState extends State<Dropper> with SingleTickerProviderStateMixin {
   final myGlobalKey = GlobalKey();
+
+  // animation
+  late Animation<double> animation;
+  late AnimationController controller;
 
   @override
   void initState() {
@@ -19,17 +23,19 @@ class _DropperState extends State<Dropper> {
       DropHitter(
         globalKey: myGlobalKey,
         hitListener: () {
-          setState(() {
-            isHitting = true;
-          });
+          controller.forward();
         },
         unHitListener: () {
-          setState(() {
-            isHitting = false;
-          });
+          controller.reverse();
         },
       ),
     );
+    controller = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 200));
+    animation = Tween<double>(begin: 5, end: 50).animate(controller)
+      ..addListener(() {
+        setState(() {});
+      });
   }
 
   bool isHitting = false;
@@ -38,9 +44,9 @@ class _DropperState extends State<Dropper> {
   Widget build(BuildContext context) {
     return Container(
       key: myGlobalKey,
-      width: 10,
-      height: 10,
-      color: isHitting ? Colors.red : Colors.green,
+      width: animation.value,
+      height: 20,
+      color: Colors.grey,
     );
   }
 }
