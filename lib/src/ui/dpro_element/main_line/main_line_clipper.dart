@@ -7,9 +7,11 @@ class MainLineClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     return Path()
+      ..lineTo(0, size.height)
       ..lineTo(drawWidth, size.height)
       ..lineTo(drawWidth, drawWidth)
-      ..lineTo(size.width, drawWidth);
+      ..lineTo(size.width, drawWidth)
+      ..lineTo(size.width, 0);
   }
 
   @override
