@@ -1,3 +1,4 @@
+import 'package:dpro_editor/src/data/hit_info/hit_info.dart';
 import 'package:dpro_editor/src/ui/dpro_editor/dpro_manager.dart';
 import 'package:flutter/widgets.dart';
 
@@ -6,8 +7,8 @@ import 'package:flutter/widgets.dart';
 class DropHitter {
   DropHitter({
     required GlobalKey globalKey,
-    required hitListener,
-    required unHitListener,
+    required final void Function() hitListener,
+    required final void Function(HitInfo?) unHitListener,
   })  : _globalKey = globalKey,
         _hitListener = hitListener,
         _unHitListener = unHitListener;
@@ -15,7 +16,7 @@ class DropHitter {
 
   final GlobalKey _globalKey;
   final void Function() _hitListener;
-  final void Function() _unHitListener;
+  final void Function(HitInfo?) _unHitListener;
 
   Offset getOffset() {
     return DproManager.getInstance().countLocalOffsetByKey(_globalKey);
@@ -25,7 +26,7 @@ class DropHitter {
     _hitListener();
   }
 
-  void unHit() {
-    _unHitListener();
+  void unHit(HitInfo? hitInfo) {
+    _unHitListener(hitInfo);
   }
 }

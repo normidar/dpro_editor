@@ -1,3 +1,4 @@
+import 'package:dpro_editor/src/data/hit_info/hit_info.dart';
 import 'package:dpro_editor/src/ui/dpro_editor/dpro_manager.dart';
 import 'package:dpro_editor/src/ui/drag_and_drop/dropper/droper_hitter/drop_hitter.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,8 @@ class _DropperState extends State<Dropper> with SingleTickerProviderStateMixin {
         hitListener: () {
           controller.forward();
         },
-        unHitListener: () {
+        unHitListener: (HitInfo? hitInfo) {
+          print(hitInfo?.hitMessage);
           controller.reverse();
         },
       ),

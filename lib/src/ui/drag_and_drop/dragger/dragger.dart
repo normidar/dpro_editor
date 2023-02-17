@@ -1,3 +1,4 @@
+import 'package:dpro_editor/src/data/hit_info/hit_info.dart';
 import 'package:dpro_editor/src/ui/dpro_editor/dpro_manager.dart';
 import 'package:flutter/material.dart';
 
@@ -7,12 +8,14 @@ class Dragger extends StatelessWidget {
     required this.underMouse,
     required this.defaultShow,
     required this.draggedShow,
+    required this.getHitInfo,
     this.dragOnEditorListener,
   });
   final Widget underMouse;
   final Widget defaultShow;
   final Widget draggedShow;
   final void Function(Offset)? dragOnEditorListener;
+  final HitInfo Function() getHitInfo;
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +28,8 @@ class Dragger extends StatelessWidget {
         DproManager.getInstance().tryToHit(position);
         dragOnEditorListener?.call(position);
       },
-      onDraggableCanceled: (velocity, offset) {
-        DproManager.getInstance().unHitAll();
+      onDragEnd: (details) {
+        DproManager.getInstance().unHitAll(getHitInfo());
       },
       child: defaultShow,
     );

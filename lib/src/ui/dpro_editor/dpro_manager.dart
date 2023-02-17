@@ -1,5 +1,6 @@
 import 'package:dpro_editor/src/common/global_key/global_key_extension.dart';
 import 'package:dpro_editor/src/common/util/random_creator.dart';
+import 'package:dpro_editor/src/data/hit_info/hit_info.dart';
 import 'package:dpro_editor/src/ui/drag_and_drop/dropper/droper_hitter/drop_hitter.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
@@ -69,19 +70,19 @@ class DproManager {
 
       if (closestHitter != null) {
         if (closestHitter != _hitting) {
-          _hitting?.unHit();
+          _hitting?.unHit(null);
           _hitting = closestHitter;
           _hitting?.hit();
         }
       } else if (_hitting != null) {
-        _hitting?.unHit();
+        _hitting?.unHit(null);
         _hitting = null;
       }
     }
   }
 
-  void unHitAll() {
-    _hitting?.unHit();
+  void unHitAll(HitInfo hitInfo) {
+    _hitting?.unHit(hitInfo);
     _hitting = null;
   }
 }
